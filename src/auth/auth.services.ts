@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { UserDocument } from "../api/user/user.model";
-import { AuthRequest } from "./auth.types";
+import { AuthRequest, Roles } from "./auth.types";
 import { getUserFilter } from "../api/user/user.services";
 /**
  * return a JWT signed by the app secret
@@ -54,4 +54,25 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
   req.user = user;
   next();
   return true;
+}
+
+//Has role
+
+
+/**
+ * Verifies if the user has the required role
+ * @param allowRoles Roles
+ * @returns
+ */
+export function hasRole(allowRoles: Roles) {
+  return (req: AuthRequest, res: Response, next: NextFunction) => {
+    const { role } = req.user as UserDocument;
+
+    if (!allowRoles.includes(role)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    next();
+    return true;
+  }
 }
