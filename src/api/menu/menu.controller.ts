@@ -61,7 +61,7 @@ export async function handleUpdateMenu(
 
   const menu = await updateMenu(id, data);
   if (!menu) {
-    return res.status(404).json({ message: "menu not found" });
+    return res.status(404).json({ message: "Menu not found" });
   }
   return res.status(200).json(menu);
 }
@@ -75,9 +75,9 @@ export async function handleDeleteMenu(
   try {
     const menu = await deleteMenu(id);
     if(!menu) {
-      return res.status(404).json({message: "menu not found"});
+      return res.status(404).json({message: "Menu not found"});
     }
-    return res.status(200).json({ message: "menu deleted" });
+    return res.status(200).json({ message: "Menu deleted" });
   } catch (error) {
     return res.status(500).json(error);
   }
