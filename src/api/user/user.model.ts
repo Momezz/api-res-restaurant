@@ -78,16 +78,6 @@ UserSchema.pre("save", async function save(next: Function) {
   }
 });
 
-// Virtuals
-UserSchema.virtual('profile').get(function profile() {
-  const {_id, name, role, email} = this;
-
-  return {
-    _id, name, role, email
-  };
-
-});
-
 //Methods
 async function comparePassword(
   this: UserDocument,
