@@ -1,8 +1,9 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface BookingDocument extends Document {
+  name: String,
   reservationDate: Date,
-  reservationTime: Date,
+  reservationTime: String,
   numberPeople: Number,
 }
 
@@ -10,13 +11,18 @@ const BookingSchema = new Schema({
   idUser: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: false,
+  },
+  name: {
+    type: String,
+    required: true,
   },
   reservationDate: {
     type: Date,
     required: true,
   },
   reservationTime: {
-    type: Date,
+    type: String,
     required: true,
   },
   numberPeople: {
