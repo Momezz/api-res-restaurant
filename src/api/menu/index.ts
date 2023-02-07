@@ -18,7 +18,7 @@ router.get("/:id", handleGetMenuById);
 router.post("/", handleCreateMenu);
 // PATCH /api/menu/:id
 router.patch('/:id', handleUpdateMenu);
-// DELETE /api/menu/:id
+// DELETE /api/menu/:id  -linea en  links importantes
 router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteMenu);
 
 export default router;
