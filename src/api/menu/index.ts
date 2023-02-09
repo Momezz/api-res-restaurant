@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { hasRole, isAuthenticated } from "../../auth/auth.services";
 import {
   handleGetAllMenus,
   handleGetMenuById,
@@ -19,6 +18,6 @@ router.post("/", handleCreateMenu);
 // PATCH /api/menu/:id
 router.patch('/:id', handleUpdateMenu);
 // DELETE /api/menu/:id  -linea en  links importantes
-router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteMenu);
+router.delete('/:id', handleDeleteMenu);
 
 export default router;
