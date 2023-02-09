@@ -6,8 +6,10 @@ import user from './api/user';
 import menu from './api/menu';
 import order from './api/order';
 import payment from './api/payment';
+import healthcheck from './api/healthcheck';
 
 function routes(app: Application): void {
+  app.use('/api/healthcheck', healthcheck);
   app.use('/api/users', user);
   app.use('/api/payments', payment);
   app.use('/api/bookings', booking);
