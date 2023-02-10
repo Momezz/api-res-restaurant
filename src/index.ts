@@ -7,7 +7,6 @@ import routes from './routes';
 dotenv.config();
 const port = process.env.PORT || 8080;
 const app = express();
-
 configExpress(app);
 configDb();
 routes(app);

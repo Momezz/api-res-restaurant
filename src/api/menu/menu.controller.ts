@@ -7,7 +7,6 @@ import {
   updateMenu,
   deleteMenu,
 } from "./menu.services";
-//import { AuthRequest } from "../../auth/auth.types";
 
 export async function handleGetAllMenus(
   req: Request,

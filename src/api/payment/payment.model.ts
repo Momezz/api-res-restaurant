@@ -1,4 +1,3 @@
-
 import { Schema, model, Document } from 'mongoose';
 
 export interface PaymentDocument extends Document {

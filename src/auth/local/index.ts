@@ -6,7 +6,5 @@ import {
 
 const router = Router();
 
-//Login
-// auth/local/login
 router.post("/login", handleLoginUser);
 export default router;

@@ -4,7 +4,6 @@ import uploadImage from './upload.services';
 
 export async function handleUploadSingle(req: Request, res: Response) {
   const { path, size } = req.file as Express.Multer.File;
-
   const maxSize = 1024 * 1024 * 2;
 
   if(size > maxSize) {

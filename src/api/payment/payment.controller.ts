@@ -4,7 +4,6 @@ import { Response, Request } from 'express';
 
 dotenv.config();
 const apiKey = process.env.STRIPE_SECRET_KEY as string;
-
 const stripe = new Stripe(apiKey, {apiVersion: '2022-11-15'});
 export async function handlePayment(req: Request, res: Response) {
   const { paymentMethod, amount, description } = req.body;

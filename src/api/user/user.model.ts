@@ -62,7 +62,6 @@ const UserSchema = new Schema(
   }
 );
 
-//Middlewares
 UserSchema.pre("save", async function save(next: Function) {
   const user = this as unknown as UserDocument;
 
@@ -78,7 +77,6 @@ UserSchema.pre("save", async function save(next: Function) {
   }
 });
 
-//Methods
 async function comparePassword(
   this: UserDocument,
   candidatePassword: string,
@@ -89,7 +87,6 @@ async function comparePassword(
   try {
     console.log(candidatePassword, user.password);
     const match = await bcrypt.compare(candidatePassword, user.password);
-
     return match;
   } catch (error: any) {
     next(error);
@@ -98,7 +95,6 @@ async function comparePassword(
 }
 
 UserSchema.methods.comparePassword = comparePassword;
-
 const User = model<UserDocument>("User", UserSchema);
 
 export default User;
