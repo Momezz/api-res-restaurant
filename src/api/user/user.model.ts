@@ -8,10 +8,10 @@ export interface UserDocument extends Document {
   email: string;
   password: string;
   phone?:number;
-  booking?: [object];
+  bookings: [object];
   createdAt: Date;
   updatedAt: Date;
-
+  image: String;
   profile: userProfileType;
   comparePassword: (password: string) => Promise<boolean>;
 
@@ -34,6 +34,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: false,
+    },
     email: {
       type: String,
       required: true,
@@ -52,7 +56,7 @@ const UserSchema = new Schema(
     phone: {
       type: Number,
     },
-    booking: [{
+    bookings: [{
       type: Schema.Types.ObjectId,
       ref: 'Booking',
     }]

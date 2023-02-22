@@ -5,7 +5,8 @@ import {
   getUserById,
   deleteUser,
   updateUser,
-  createUser
+  createUser,
+  getUserFilter
 } from "./user.services";
 
 export async function handleAllGetUsers(
@@ -38,6 +39,8 @@ export async function handleGetUser(
   }
 };
 
+
+
 export async function handleCreateUser(
   req: Request,
   res: Response,
@@ -52,21 +55,19 @@ export async function handleCreateUser(
   }
 };
 
-export async function handleUpdateUser(req: Request, res: Response) {
+export async function handleUpdateUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const { id } = req.params;
   const data = req.body;
-
-  try {
-    const user = await updateUser(id, data);
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found to update" });
-    }
-
-    return res.status(200).json(user);
-  } catch (error) {
-    return res.status(500).json(error);
+  console.log('data', data)
+  const user = await updateUser(id, data);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
   }
+  return res.status(200).json(user);
 }
 
 export async function handleDeleteUser(
@@ -82,4 +83,3 @@ export async function handleDeleteUser(
     return res.status(500).json(error);
   }
 };
-

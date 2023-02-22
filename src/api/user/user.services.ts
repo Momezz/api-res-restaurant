@@ -6,7 +6,7 @@ export function getAllUsers() {
 }
 
 export function getUserById(id: string) {
-  const user = User.findById(id).populate("favorite");
+  const user = User.findById(id).populate("bookings");
   return user;
 }
 

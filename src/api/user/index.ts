@@ -16,9 +16,9 @@ router.get('/:id', handleGetUser);
 
 router.post('/', handleCreateUser);
 
-router.patch('/:id', isAuthenticated, handleUpdateUser);
+router.patch('/:id', handleUpdateUser);
 
-router.delete ('/:id', isAuthenticated, handleDeleteUser);
+router.delete ('/:id', handleDeleteUser);
 
 
 export default router;
