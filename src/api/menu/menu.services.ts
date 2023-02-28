@@ -2,7 +2,7 @@ import Menu, { MenuDocument } from "./menu.model";
 import {DocumentDefinition} from 'mongoose';
 
 export function getAllMenus() {
-  return Menu.find({}, { password: 0 });
+  return Menu.find({});
 }
 
 export function getMenuById(id: string) {

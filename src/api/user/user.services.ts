@@ -6,7 +6,7 @@ export function getAllUsers() {
 }
 
 export function getUserById(id: string) {
-  const user = User.findById(id).populate("bookings");
+  const user = User.findById(id).populate({ path: 'bookings', select: 'name reservationDate reservationTime numberPeople' });
   return user;
 }
 

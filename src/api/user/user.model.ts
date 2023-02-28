@@ -3,16 +3,16 @@ import { userProfileType } from "./user.types";
 import bcrypt from "bcryptjs";
 
 export interface UserDocument extends Document {
-  role: "USER" | "ADMIN";
-  name: string;
-  email: string;
-  password: string;
+  role?: "USER" | "ADMIN";
+  name?: string;
+  email?: string;
+  password?: string;
   phone?:number;
   bookings: [object];
   createdAt: Date;
   updatedAt: Date;
-  image: String;
-  profile: userProfileType;
+  image?: String;
+  //profile: userProfileType;
   comparePassword: (password: string) => Promise<boolean>;
 
   emailConfirmToken?: String,

@@ -4,5 +4,6 @@ export type userProfileType = {
   role: string;
   email: string;
   password: string;
+  bookings: string;
   phone: number;
 };

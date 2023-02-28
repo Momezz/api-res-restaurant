@@ -6,6 +6,7 @@ import {
   updateBooking
 } from "./booking.services";
 import { Request, Response, NextFunction } from 'express';
+import { updateUser } from "../user/user.services";
 
 export async function handleAllGetBookings(req: Request, res: Response, next: NextFunction) {
   try {
@@ -35,6 +36,12 @@ export async function handleCreateBooking(req: Request, res: Response, next: Nex
   const data = req.body;
   try {
     const booking = await createBooking(data);
+    await updateUser(data.id, {
+      bookings: [booking._id],
+      comparePassword: function (password: string): Promise<boolean> {
+        throw new Error("Function not implemented.");
+      }
+    });
     return res.status(201).json(booking);
   } catch (error) {
     return res.status(500).json(error);
