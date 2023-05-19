@@ -39,8 +39,6 @@ export async function handleGetUser(
   }
 };
 
-
-
 export async function handleCreateUser(
   req: Request,
   res: Response,

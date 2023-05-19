@@ -7,18 +7,16 @@ export interface UserDocument extends Document {
   name: string;
   email: string;
   password: string;
-  phone?:number;
+  phone?: number;
   bookings: [object];
   createdAt: Date;
   updatedAt: Date;
   image: String;
   profile: userProfileType;
   comparePassword: (password: string) => Promise<boolean>;
-
   emailConfirmToken?: String,
   emailConfirmExpires?: Date,
-  isActive?:Boolean,
-
+  isActive?: Boolean,
   passwordResetToken?: String,
   passwordResetExpires?: Date,
 }
@@ -45,8 +43,8 @@ const UserSchema = new Schema(
       lowercase: true,
     },
     emailConfirmToken: String,
-    emailConfirmExpires : Date,
-    isActive:Boolean,
+    emailConfirmExpires: Date,
+    isActive: Boolean,
     password: {
       type: String,
       required: true,
@@ -68,7 +66,6 @@ const UserSchema = new Schema(
 
 UserSchema.pre("save", async function save(next: Function) {
   const user = this as unknown as UserDocument;
-
   try {
     if (!user.isModified("password")) {
       return next();
@@ -87,7 +84,6 @@ async function comparePassword(
   next: Function
 ): Promise<boolean> {
   const user = this;
-
   try {
     console.log(candidatePassword, user.password);
     const match = await bcrypt.compare(candidatePassword, user.password);

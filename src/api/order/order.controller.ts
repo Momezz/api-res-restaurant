@@ -27,13 +27,10 @@ export async function handleGetOrderById(
   next: NextFunction
 ) {
   const { id } = req.params;
-
   const order = await getOrderById(id);
-
   if (!order) {
     return res.status(404).json({ message: "Order not found" });
   }
-
   return res.status(200).json(order);
 }
 
@@ -58,12 +55,10 @@ export async function handleUpdateOrder(
 ) {
   const { id } = req.params;
   const data = req.body;
-
   const order = await updateOrder(id, data);
   if (!order) {
     return res.status(404).json({ message: "Order not found" });
   }
-
   return res.status(200).json(order);
 }
 
@@ -73,7 +68,6 @@ export async function handleDeleteOrder(
   next: NextFunction
 ) {
   const { id } = req.params;
-
   try {
     const order = await deleteOrder(id);
     if (!order) {

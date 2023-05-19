@@ -30,7 +30,7 @@ const BookingSchema = new Schema({
     type: Number,
     required: true,
   },
-},{
+}, {
   timestamps: true,
   versionKey: false,
 });

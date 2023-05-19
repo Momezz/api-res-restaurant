@@ -21,8 +21,8 @@ export async function handleGetBooking(req: Request, res: Response, next: NextFu
   const { id } = req.params;
   try {
     const booking = await getBookingById(id);
-    if(!booking){
-      return res.status(404).json({message: "booking not found"});
+    if (!booking) {
+      return res.status(404).json({ message: "booking not found" });
     }
     return res.status(200).json(booking);
   } catch (error) {
@@ -41,7 +41,7 @@ export async function handleCreateBooking(req: Request, res: Response, next: Nex
   }
 }
 
-export async function handleUpdateBooking(req: Request, res: Response,  next: NextFunction) {
+export async function handleUpdateBooking(req: Request, res: Response, next: NextFunction) {
   const { id } = req.params;
   const data = req.body;
   const product = await updateBooking(id, data);

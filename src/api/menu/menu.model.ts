@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-export interface MenuDocument extends Document{
+export interface MenuDocument extends Document {
   category: String;
   name: String;
   description: String;
