@@ -1,3 +1,4 @@
+import User from "../user/user.model";
 import {
   createBooking,
   deleteBooking,
@@ -35,6 +36,11 @@ export async function handleCreateBooking(req: Request, res: Response, next: Nex
   const data = req.body;
   try {
     const booking = await createBooking(data);
+    const user = await User.findById(data.id);
+    if (user) {
+      user.bookings.push(booking._id);
+      await user.save();
+    }
     return res.status(201).json(booking);
   } catch (error) {
     return res.status(500).json(error);
