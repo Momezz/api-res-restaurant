@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-export interface OrderDocument extends Document{
+export interface OrderDocument extends Document {
   name: String;
   adress: String;
   orderPrice: String;
@@ -32,5 +32,4 @@ const OrderSchema = new Schema({
 });
 
 const Order = model<OrderDocument>('Order', OrderSchema);
-
 export default Order;

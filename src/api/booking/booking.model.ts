@@ -1,29 +1,36 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, ObjectId } from 'mongoose';
 
 export interface BookingDocument extends Document {
+  id: String,
+  name: String,
   reservationDate: Date,
-  reservationTime: Date,
+  reservationTime: String,
   numberPeople: Number,
 }
 
 const BookingSchema = new Schema({
-  idUser: {
+  id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    required: false,
+  },
+  name: {
+    type: String,
+    required: true,
   },
   reservationDate: {
     type: Date,
     required: true,
   },
   reservationTime: {
-    type: Date,
+    type: String,
     required: true,
   },
   numberPeople: {
     type: Number,
     required: true,
   },
-},{
+}, {
   timestamps: true,
   versionKey: false,
 });

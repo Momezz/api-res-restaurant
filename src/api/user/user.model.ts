@@ -7,18 +7,16 @@ export interface UserDocument extends Document {
   name: string;
   email: string;
   password: string;
-  phone?:number;
-  booking?: [object];
+  phone?: number;
+  bookings: [object];
   createdAt: Date;
   updatedAt: Date;
-
+  image: String;
   profile: userProfileType;
   comparePassword: (password: string) => Promise<boolean>;
-
   emailConfirmToken?: String,
   emailConfirmExpires?: Date,
-  isActive?:Boolean,
-
+  isActive?: Boolean,
   passwordResetToken?: String,
   passwordResetExpires?: Date,
 }
@@ -34,6 +32,10 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: false,
+    },
     email: {
       type: String,
       required: true,
@@ -41,8 +43,8 @@ const UserSchema = new Schema(
       lowercase: true,
     },
     emailConfirmToken: String,
-    emailConfirmExpires : Date,
-    isActive:Boolean,
+    emailConfirmExpires: Date,
+    isActive: Boolean,
     password: {
       type: String,
       required: true,
@@ -52,7 +54,7 @@ const UserSchema = new Schema(
     phone: {
       type: Number,
     },
-    booking: [{
+    bookings: [{
       type: Schema.Types.ObjectId,
       ref: 'Booking',
     }]
@@ -62,10 +64,8 @@ const UserSchema = new Schema(
   }
 );
 
-//Middlewares
 UserSchema.pre("save", async function save(next: Function) {
   const user = this as unknown as UserDocument;
-
   try {
     if (!user.isModified("password")) {
       return next();
@@ -78,18 +78,15 @@ UserSchema.pre("save", async function save(next: Function) {
   }
 });
 
-//Methods
 async function comparePassword(
   this: UserDocument,
   candidatePassword: string,
   next: Function
 ): Promise<boolean> {
   const user = this;
-
   try {
     console.log(candidatePassword, user.password);
     const match = await bcrypt.compare(candidatePassword, user.password);
-
     return match;
   } catch (error: any) {
     next(error);
@@ -98,7 +95,6 @@ async function comparePassword(
 }
 
 UserSchema.methods.comparePassword = comparePassword;
-
 const User = model<UserDocument>("User", UserSchema);
 
 export default User;

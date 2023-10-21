@@ -9,15 +9,12 @@ import { getUserFilter } from "../api/user/user.services";
  * @returns token Strng
  */
 
-
 export function signToken(payload: any) {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
     throw new Error("JWT_SECRET is not defined");
   }
-
   const token = jwt.sign(payload, secret);
-
   return token;
 }
 
@@ -28,14 +25,12 @@ export function verifyToken(token: string) {
   }
   try {
     const decoded = jwt.verify(token, secret);
-
     return decoded;
   } catch (error) {
     return false;
   }
 }
 
-//is authenticated
 export async function isAuthenticated(req: AuthRequest, res: Response, next: NextFunction){
   const token = req.headers?.authorization?.split(' ')[1];
   if (!token){
@@ -56,9 +51,6 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
   return true;
 }
 
-//Has role
-
-
 /**
  * Verifies if the user has the required role
  * @param allowRoles Roles
@@ -67,11 +59,9 @@ export async function isAuthenticated(req: AuthRequest, res: Response, next: Nex
 export function hasRole(allowRoles: Roles) {
   return (req: AuthRequest, res: Response, next: NextFunction) => {
     const { role } = req.user as UserDocument;
-
     if (!allowRoles.includes(role)) {
       return res.status(403).json({ message: 'Forbidden' });
     }
-
     next();
     return true;
   }

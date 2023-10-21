@@ -1,4 +1,4 @@
-import {DocumentDefinition, FilterQuery} from "mongoose";
+import { DocumentDefinition, FilterQuery } from "mongoose";
 import User, { UserDocument } from "./user.model";
 
 export function getAllUsers() {
@@ -6,7 +6,7 @@ export function getAllUsers() {
 }
 
 export function getUserById(id: string) {
-  const user = User.findById(id).populate("favorite");
+  const user = User.findById(id).populate("bookings");
   return user;
 }
 
@@ -15,7 +15,7 @@ export function createUser(user: DocumentDefinition<Omit<UserDocument, 'createdA
 }
 
 export function updateUser(id: string, user: DocumentDefinition<Omit<UserDocument, 'createdAt' | 'updatedAt'>>) {
-  return User.findByIdAndUpdate(id, user, {new: true});
+  return User.findByIdAndUpdate(id, user, { new: true });
 }
 
 export function getUserFilter(filter: FilterQuery<UserDocument>) {

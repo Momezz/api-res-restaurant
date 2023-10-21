@@ -1,3 +1,4 @@
+import User from "../user/user.model";
 import {
   createBooking,
   deleteBooking,
@@ -21,8 +22,8 @@ export async function handleGetBooking(req: Request, res: Response, next: NextFu
   const { id } = req.params;
   try {
     const booking = await getBookingById(id);
-    if(!booking){
-      return res.status(404).json({message: "booking not found"});
+    if (!booking) {
+      return res.status(404).json({ message: "booking not found" });
     }
     return res.status(200).json(booking);
   } catch (error) {
@@ -35,13 +36,18 @@ export async function handleCreateBooking(req: Request, res: Response, next: Nex
   const data = req.body;
   try {
     const booking = await createBooking(data);
+    const user = await User.findById(data.id);
+    if (user) {
+      user.bookings.push(booking._id);
+      await user.save();
+    }
     return res.status(201).json(booking);
   } catch (error) {
     return res.status(500).json(error);
   }
 }
 
-export async function handleUpdateBooking(req: Request, res: Response,  next: NextFunction) {
+export async function handleUpdateBooking(req: Request, res: Response, next: NextFunction) {
   const { id } = req.params;
   const data = req.body;
   const product = await updateBooking(id, data);

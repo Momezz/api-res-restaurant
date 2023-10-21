@@ -15,17 +15,13 @@ export async function handleLoginUser(req: Request, res: Response, next: NextFun
 
   try {
     const user = await getUserFilter({ email });
-
     if (!user) {
       return res.status(404).json({ message: "Invalid email or password" });
     }
-
     const validPassword = await user.comparePassword(password)
-
     if (!validPassword) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
     // Generate token JWT
     const payload = JSON.stringify(user);
     const token = signToken(payload);

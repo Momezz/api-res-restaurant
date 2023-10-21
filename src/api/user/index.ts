@@ -11,14 +11,9 @@ import {
 const router = Router();
 
 router.get('/', handleAllGetUsers);
-
 router.get('/:id', handleGetUser);
-
 router.post('/', handleCreateUser);
-
-router.patch('/:id', isAuthenticated, handleUpdateUser);
-
-router.delete ('/:id', isAuthenticated, handleDeleteUser);
-
+router.patch('/:id', handleUpdateUser);
+router.delete ('/:id', handleDeleteUser);
 
 export default router;

@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-export interface MenuDocument extends Document{
+export interface MenuDocument extends Document {
   category: String;
   name: String;
   description: String;
@@ -25,7 +25,7 @@ const MenuSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   price: {
     type: Number,
