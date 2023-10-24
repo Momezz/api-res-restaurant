@@ -6,6 +6,7 @@ import user from './api/user';
 import menu from './api/menu';
 import order from './api/order';
 import payment from './api/payment';
+import publications from './api/publication';
 import healthcheck from './api/healthcheck';
 
 function routes(app: Application): void {
@@ -15,8 +16,8 @@ function routes(app: Application): void {
   app.use('/api/bookings', booking);
   app.use('/api/menu', menu);
   app.use('/api/order', order);
+  app.use('/api/publications', publications);
   app.use('/api/upload', upload);
-  //auth routes
   app.use('/auth/local', authLocal);
 };
 
