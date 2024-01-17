@@ -1,5 +1,4 @@
 import { Application } from 'express';
-import authLocal from './auth/local';
 import booking from './api/booking';
 import upload from './api/upload';
 import user from './api/user';
@@ -8,6 +7,7 @@ import order from './api/order';
 import payment from './api/payment';
 import publications from './api/publication';
 import healthcheck from './api/healthcheck';
+import authLocal from './auth/local';
 
 function routes(app: Application): void {
   app.use('/api/healthcheck', healthcheck);
