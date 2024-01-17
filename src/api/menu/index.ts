@@ -6,14 +6,13 @@ import {
   handleUpdateMenu,
   handleDeleteMenu
 } from "./menu.controller";
+import { isAuthenticated, hasRole } from "../../auth/auth.services";
 
 const router = Router();
-
 router.get("/", handleGetAllMenus);
 router.get("/:id", handleGetMenuById);
-router.post("/", handleCreateMenu);
-router.patch('/:id', handleUpdateMenu);
-router.delete('/:id', handleDeleteMenu);
-// router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteMenu);
+router.post("/",  isAuthenticated, hasRole(['ADMIN']), handleCreateMenu);
+router.patch('/:id', isAuthenticated, hasRole(['ADMIN']), handleUpdateMenu);
+router.delete('/:id', isAuthenticated, hasRole(['ADMIN']), handleDeleteMenu);
 
 export default router;
